@@ -1,0 +1,691 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "272acc43409e444c161069a05b4f3793",
+    "entities": [
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`first_name` TEXT NOT NULL, PRIMARY KEY(`first_name`))",
+        "fields": [
+          {
+            "fieldPath": "firstName",
+            "columnName": "first_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "first_name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_users_first_name",
+            "unique": true,
+            "columnNames": [
+              "first_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_users_first_name` ON `${TABLE_NAME}` (`first_name`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "locus_point",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idAuto` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `taskId` TEXT, `ids` INTEGER, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idAuto",
+            "columnName": "idAuto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taskId",
+            "columnName": "taskId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ID",
+            "columnName": "ids",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idAuto"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "erro_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ids` INTEGER, `id` INTEGER NOT NULL, `city` TEXT, `county` TEXT, `latitude` REAL, `longitude` REAL, `resourceID` INTEGER, `resourceType` TEXT, `errorObjectName` TEXT, `errorLocateDes` TEXT, `errorBig` TEXT, `errorSmall` TEXT, `errorDescribe` TEXT, `isZg` TEXT, `zgRq` TEXT, `userId` TEXT, `createTime` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "ID",
+            "columnName": "ids",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "routeID",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "county",
+            "columnName": "county",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resourceID",
+            "columnName": "resourceID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resourceType",
+            "columnName": "resourceType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorObjectName",
+            "columnName": "errorObjectName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorLocateDes",
+            "columnName": "errorLocateDes",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorBig",
+            "columnName": "errorBig",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorSmall",
+            "columnName": "errorSmall",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorDescribe",
+            "columnName": "errorDescribe",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isZg",
+            "columnName": "isZg",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zgRq",
+            "columnName": "zgRq",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createTime",
+            "columnName": "createTime",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_erro_info_id",
+            "unique": true,
+            "columnNames": [
+              "id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_erro_info_id` ON `${TABLE_NAME}` (`id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "photo_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ids` INTEGER, `id` INTEGER NOT NULL, `relatedID` INTEGER, `photoType` TEXT, `latitude` REAL, `longitude` REAL, `photoName` TEXT, `createTime` INTEGER, `resourceType` TEXT, `userId` TEXT, `photoString` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "ID",
+            "columnName": "ids",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "routeID",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "relatedID",
+            "columnName": "relatedID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoType",
+            "columnName": "photoType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoName",
+            "columnName": "photoName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createTime",
+            "columnName": "createTime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resourceType",
+            "columnName": "resourceType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photoString",
+            "columnName": "photoString",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_photo_info_id",
+            "unique": true,
+            "columnNames": [
+              "id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_photo_info_id` ON `${TABLE_NAME}` (`id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "LXResEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`routeUUID` TEXT NOT NULL, `routeName` TEXT, `aPointUUID` TEXT, `zPointUUID` TEXT, `taskUUID` TEXT, PRIMARY KEY(`routeUUID`))",
+        "fields": [
+          {
+            "fieldPath": "routeUUID",
+            "columnName": "routeUUID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "routeName",
+            "columnName": "routeName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPointUUID",
+            "columnName": "aPointUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPointUUID",
+            "columnName": "zPointUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "taskUUID",
+            "columnName": "taskUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "routeUUID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_LXResEntity_routeUUID",
+            "unique": false,
+            "columnNames": [
+              "routeUUID"
+            ],
+            "createSql": "CREATE  INDEX `index_LXResEntity_routeUUID` ON `${TABLE_NAME}` (`routeUUID`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "LinesBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `taskUUID` TEXT, `route_uuid` TEXT, `uuid` TEXT, `name` TEXT, `resType` TEXT, `aPoint` TEXT, `zPoint` TEXT, `aPointLng` TEXT, `aPointLat` TEXT, `zPointLng` TEXT, `zPointLat` TEXT, `status` TEXT, `continuousNum` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "mid",
+            "columnName": "mid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taskUUID",
+            "columnName": "taskUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "routeUUID",
+            "columnName": "route_uuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "uuid",
+            "columnName": "uuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resType",
+            "columnName": "resType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPoint",
+            "columnName": "aPoint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPoint",
+            "columnName": "zPoint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPointLng",
+            "columnName": "aPointLng",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPointLat",
+            "columnName": "aPointLat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPointLng",
+            "columnName": "zPointLng",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPointLat",
+            "columnName": "zPointLat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "continuousNum",
+            "columnName": "continuousNum",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_LinesBean_taskUUID",
+            "unique": false,
+            "columnNames": [
+              "taskUUID"
+            ],
+            "createSql": "CREATE  INDEX `index_LinesBean_taskUUID` ON `${TABLE_NAME}` (`taskUUID`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MyWayBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `routeId` TEXT, `lineId` TEXT, `lat` REAL NOT NULL, `lon` REAL NOT NULL, `allLength` INTEGER NOT NULL, `matchingRatio` REAL NOT NULL, `state` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "mid",
+            "columnName": "mid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "routeId",
+            "columnName": "routeId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lineId",
+            "columnName": "lineId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lon",
+            "columnName": "lon",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "allLength",
+            "columnName": "allLength",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "matchingRatio",
+            "columnName": "matchingRatio",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_MyWayBean_lineId",
+            "unique": false,
+            "columnNames": [
+              "lineId"
+            ],
+            "createSql": "CREATE  INDEX `index_MyWayBean_lineId` ON `${TABLE_NAME}` (`lineId`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "LXResNewEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`routeUUID` TEXT NOT NULL, `routeName` TEXT, `aPointUUID` TEXT, `zPointUUID` TEXT, `taskUUID` TEXT, PRIMARY KEY(`routeUUID`))",
+        "fields": [
+          {
+            "fieldPath": "routeUUID",
+            "columnName": "routeUUID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "routeName",
+            "columnName": "routeName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPointUUID",
+            "columnName": "aPointUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPointUUID",
+            "columnName": "zPointUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "taskUUID",
+            "columnName": "taskUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "routeUUID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_LXResNewEntity_routeUUID",
+            "unique": false,
+            "columnNames": [
+              "routeUUID"
+            ],
+            "createSql": "CREATE  INDEX `index_LXResNewEntity_routeUUID` ON `${TABLE_NAME}` (`routeUUID`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "LinesNewBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `taskUUID` TEXT, `routeUUID` TEXT, `uuid` TEXT, `name` TEXT, `resType` TEXT, `aPoint` TEXT, `zPoint` TEXT, `aPointLng` TEXT, `aPointLat` TEXT, `zPointLng` TEXT, `zPointLat` TEXT, `status` TEXT, `continuousNum` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "mid",
+            "columnName": "mid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taskUUID",
+            "columnName": "taskUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "routeUUID",
+            "columnName": "routeUUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "uuid",
+            "columnName": "uuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resType",
+            "columnName": "resType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPoint",
+            "columnName": "aPoint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPoint",
+            "columnName": "zPoint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPointLng",
+            "columnName": "aPointLng",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "aPointLat",
+            "columnName": "aPointLat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPointLng",
+            "columnName": "zPointLng",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zPointLat",
+            "columnName": "zPointLat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "continuousNum",
+            "columnName": "continuousNum",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_LinesNewBean_taskUUID",
+            "unique": false,
+            "columnNames": [
+              "taskUUID"
+            ],
+            "createSql": "CREATE  INDEX `index_LinesNewBean_taskUUID` ON `${TABLE_NAME}` (`taskUUID`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"272acc43409e444c161069a05b4f3793\")"
+    ]
+  }
+}

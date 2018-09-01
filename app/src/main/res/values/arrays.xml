@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="qr_settings_values">
+        <item>从相册选择Logo</item>
+        <item>保存二维码至手机</item>
+        <item>二维码前景色</item>
+        <item>二维码背景色</item>
+        <item>恢复默认</item>
+    </string-array>
+
+
+
+    <string-array name="trouble_type">
+        <item>类型1</item>
+        <item>类型2</item>
+    </string-array>
+    <string-array name="urgency_level">
+        <item>紧急</item>
+        <item>一般</item>
+    </string-array>
+
+    <string-array name="luyouzhuangtai">
+        <item>正确</item>
+        <item>系统需新增</item>
+        <item>系统需删除</item>
+        <item>系统需修改</item>
+    </string-array>
+    <string-array name="jiaogezhuangtai">
+        <item>通过</item>
+        <item>不通过</item>
+        <item>未交割</item>
+    </string-array>
+
+    <string-array name="AcceptResult">
+        <item>框架</item>
+        <item>砖混</item>
+        <item>独立基站</item>
+        <item>其他</item>
+    </string-array>
+
+</resources>
