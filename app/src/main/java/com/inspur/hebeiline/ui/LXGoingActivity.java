@@ -279,9 +279,9 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
 
         //提交数据回调
         submitLineModel = ViewModelProviders.of(this).get(SubmitLineModel.class);
-        submitLineModel.getCurrentData(this).observe(this, new Observer<String>() {
+        submitLineModel.getCurrentData(this).observe(this, new Observer<Object>() {
             @Override
-            public void onChanged(@Nullable String s) {
+            public void onChanged(@Nullable Object s) {
                 ToastUtil.showToast(LXGoingActivity.this, "提交成功", ToastUtil.TOAST_TYPE_WARNING);
                 finish();
             }
@@ -318,7 +318,6 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
 //                                }
 //                            }
 //                        });
-//
 //            }
 //        });
 
@@ -432,7 +431,6 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
 
             @Override
             public void onDeleteRouteCallBack(int routeID) {
-                String json = "{\"routeId\":" + routeID + "}";
                 // deleteRouteModel.deleteRouteTask(mRequestClient,json);
             }
 
@@ -458,11 +456,11 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
                         manyPos -= 1;
                         if (manyPos <= 0) {
                             manyPos = 3;
-                            initLineation2(lxResEntities);
+                            initLineation3(lxResEntities);
                         }
                     }else{
                         isMyFirstLoad = false;
-                        initLineation2(lxResEntities);
+                        initLineation3(lxResEntities);
                     }
 
 
@@ -523,7 +521,7 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
     private LXResNewEntity.LinesNewBean calculatelines;
     private List<LXResNewEntity.LinesNewBean> bothList;
 
-    private void calculateBothPoint() {
+    /*private void calculateBothPoint() {
         calculateres = SingleRoute.getInstance().getmCLXResNewEntity();
         calculatelines = SingleRoute.getInstance().getmCNearLine();
         taskUUID = calculatelines.getTaskUUID();
@@ -579,7 +577,7 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
 
                     }
                 });
-    }
+    }*/
 
     private double convert(float value) {
         long l1 = Math.round(value * 100); //四舍五入
@@ -856,65 +854,7 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
         for (int i = 0; i < tmLineMainEntities.get(0).getLines().size(); i++) {
             ls[i] = tmLineMainEntities.get(0).getLines().get(i);
         }
-        /*Observable.fromArray(ls)
-                .concatMap(new Function<LXResEntity.LinesBean, ObservableSource<String>>() {
-                    @Override
-                    public ObservableSource<String> apply(LXResEntity.LinesBean linesBean) throws Exception {
-                        if (linesBean == null || !StringUtils.isDouble(linesBean.getAPointLat()) || !StringUtils.isDouble(linesBean.getAPointLng()) || !StringUtils.isDouble(linesBean.getZPointLat()) || !StringUtils.isDouble(linesBean.getZPointLng())) {
-                            return Observable.just("no");
-                        }
 
-                        *//*
-         * 添加start的点
-         *//*
-                        LatLng lalnStart = null;
-                        if (linesBean != null) {
-                            lalnStart = new LatLng(StringUtils.toDouble(linesBean.getAPointLat()), StringUtils.toDouble(linesBean.getAPointLng()));
-                        }
-
-                        *//*
-         *
-         * 添加end的点
-         *//*
-                        LatLng lalnEnd = new LatLng(StringUtils.toDouble(linesBean.getZPointLat()), StringUtils.toDouble(linesBean.getZPointLng()));
-
-                        if (ToolUtil.isEmpty(polylineList)) {
-                            polylineList = new ArrayList<>();
-                        }
-
-                        latLngs.add(lalnStart);
-                        latLngs.add(lalnEnd);
-
-
-                        //未巡检
-                        if (!StringUtils.isEmpty(linesBean.getStatus()) && linesBean.getStatus().equals("0")) {
-                            colorMy = Color.argb(255, 225, 0, 30);
-                            //已巡检
-                        } else {
-                            colorMy = Color.argb(255, 28, 137, 30);
-                        }
-
-                        //.zIndex(20)
-                        Polyline polylinem = aMap.addPolyline(new PolylineOptions().
-                                addAll(latLngs).width(2).color(colorMy));
-                        polylineList.add(polylinem);
-
-                        //latLngs.clear();
-
-                        //  Log.d("qqqqqqq","花了多少线"+);
-
-                        return Observable.just("ok");
-
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String linesBean) throws Exception {
-
-                    }
-                });*/
 
 
         Observable.fromArray(tmLineMainEntities.get(0).getLines())
@@ -1045,7 +985,7 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
 
                         latLngs.clear();
 
-                        //  Log.d("qqqqqqq","花了多少线"+);
+
                         myAddNum -= 1;
                         return Observable.just("ok");
 
@@ -1060,6 +1000,83 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
                             isPolLineOk = true;
                             Log.d("qqqqq", "线完成");
                         }
+                    }
+                });
+    }
+
+
+    private void initLineation3(List<LXResNewEntity> tmLineMainEntities) {
+        if (ToolUtil.isEmpty(tmLineMainEntities) || ToolUtil.isEmpty(tmLineMainEntities.get(0).getLines())) {
+            return;
+        }
+
+        if (!isPolLineOk) {
+            Log.d("qqqqqq", "上次的线还没有画完，继续上次");
+            return;
+        }
+        isPolLineOk = false;
+        Log.d("qqqqqq", "开始划线");
+
+        //删掉地图的旧数据
+        if (!ToolUtil.isEmpty(polylineList)) {
+            for (int i = 0; i < polylineList.size(); i++) {
+                if (polylineList.get(i) != null) {
+                    polylineList.get(i).remove();
+                }
+            }
+            polylineList.clear();
+        }
+
+        List<LXResNewEntity.LinesNewBean> ls = tmLineMainEntities.get(0).getLines();
+        Observable.fromArray(ls)
+                .concatMap(new Function<List<LXResNewEntity.LinesNewBean>, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(List<LXResNewEntity.LinesNewBean> linesBeans) throws Exception {
+                    for(int i = 0;i < linesBeans.size();i++){
+                        LXResNewEntity.LinesNewBean linesBean = linesBeans.get(i);
+                        if (linesBean == null || !StringUtils.isDouble(linesBean.getAPointLat()) || !StringUtils.isDouble(linesBean.getAPointLng()) || !StringUtils.isDouble(linesBean.getZPointLat()) || !StringUtils.isDouble(linesBean.getZPointLng())) {
+                           continue;
+                        }
+                        LatLng lalnStart = new LatLng(StringUtils.toDouble(linesBean.getAPointLat()), StringUtils.toDouble(linesBean.getAPointLng()));
+
+                        LatLng lalnEnd = new LatLng(StringUtils.toDouble(linesBean.getZPointLat()), StringUtils.toDouble(linesBean.getZPointLng()));
+
+                        latLngs.add(lalnStart);
+                        latLngs.add(lalnEnd);
+
+                        if (ToolUtil.isEmpty(polylineList)) {
+                            polylineList = new ArrayList<>();
+                        }
+
+                        //未巡检
+                        if (!StringUtils.isEmpty(linesBean.getStatus()) && linesBean.getStatus().equals("0")) {
+                            colorMy = Color.argb(255, 225, 0, 30);
+                            //已巡检
+                        } else {
+                            colorMy = Color.argb(255, 28, 137, 30);
+                        }
+
+                        //.zIndex(20)
+                        Polyline polylinem = aMap.addPolyline(new PolylineOptions().
+                                addAll(latLngs).width(8).color(colorMy));
+                        polylineList.add(polylinem);
+
+                        latLngs.clear();
+                       // myAddNum -= 1;
+                    }
+                        return Observable.just("ok");
+
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String linesBean) throws Exception {
+                        //if (myAddNum <= 0) {
+                            isPolLineOk = true;
+                            Log.d("qqqqq", "线完成");
+                      //  }
                     }
                 });
     }
@@ -1089,7 +1106,7 @@ public class LXGoingActivity extends BaseActivity implements Toolbar.OnMenuItemC
 //                zsl_go.setText("开始");
                 showPointDialog("end");
             } else {
-                btRest.setVisibility(View.VISIBLE);
+//                btRest.setVisibility(View.VISIBLE);
                 isStart = true;
                 zsl_go.setText("结束");
                 cLocationModel.getCurrentLocation(mContext, false, aMap, null, taskUUID);

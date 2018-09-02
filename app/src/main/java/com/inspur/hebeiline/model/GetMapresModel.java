@@ -223,7 +223,7 @@ public class GetMapresModel extends BaseViewModel {
             if (db == null) {
                 db = Room.databaseBuilder(mContext.getApplicationContext(), AppDatabase.class, "database-name").build();
             }
-            db.myDao().loadRouteNew()
+           /* db.myDao().loadRouteNew()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<List<LXResNewEntity>>() {
@@ -247,7 +247,7 @@ public class GetMapresModel extends BaseViewModel {
                                         });
                             }
                         }
-                    });
+                    });*/
         }
     }
 

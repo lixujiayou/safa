@@ -161,15 +161,20 @@ public class LXResNewEntity implements Serializable{
          * status : 0
          */
 
-        @PrimaryKey(autoGenerate = true)
-        private int mid;
+//        @PrimaryKey(autoGenerate = true)
+//        private int mid;
 
         private String taskUUID;
 
-//        @ColumnInfo(name = "route_uuid")
+//      @ColumnInfo(name = "route_uuid")
+
         private String routeUUID;
 
+        @NonNull
+        @PrimaryKey
         private String uuid;
+
+
         private String name;
         private String resType;
         private String aPoint;
@@ -185,7 +190,6 @@ public class LXResNewEntity implements Serializable{
         @Override
         public String toString() {
             return "LinesBean{" +
-                    "mid=" + mid +
                     ", taskUUID='" + taskUUID + '\'' +
                     ", routeUUID='" + routeUUID + '\'' +
                     ", uuid='" + uuid + '\'' +
@@ -199,14 +203,6 @@ public class LXResNewEntity implements Serializable{
                     ", zPointLat='" + zPointLat + '\'' +
                     ", status='" + status + '\'' +
                     '}';
-        }
-
-        public int getMid() {
-            return mid;
-        }
-
-        public void setMid(int mid) {
-            this.mid = mid;
         }
 
         public int getContinuousNum() {

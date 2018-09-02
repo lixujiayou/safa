@@ -79,7 +79,7 @@ public interface MallRequest {
     //提交
 //    @FormUrlEncoded
     @POST(AllUrl.updateTaskRecord)
-    Observable<String> updateTaskRecord(@HeaderMap Map<String, String> lang, @Body List<LineResultEntity> lineResultEntity);
+    Observable<Object> updateTaskRecord(@HeaderMap Map<String, String> lang, @Body List<LineResultEntity> lineResultEntity);
 
 
     //高德地图的编码转换

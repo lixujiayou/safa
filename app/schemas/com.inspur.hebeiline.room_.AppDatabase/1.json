@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "272acc43409e444c161069a05b4f3793",
+    "identityHash": "7fad8ae7dab065fabffdd6b853781b80",
     "entities": [
       {
         "tableName": "users",
@@ -577,14 +577,8 @@
       },
       {
         "tableName": "LinesNewBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `taskUUID` TEXT, `routeUUID` TEXT, `uuid` TEXT, `name` TEXT, `resType` TEXT, `aPoint` TEXT, `zPoint` TEXT, `aPointLng` TEXT, `aPointLat` TEXT, `zPointLng` TEXT, `zPointLat` TEXT, `status` TEXT, `continuousNum` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`taskUUID` TEXT, `routeUUID` TEXT, `uuid` TEXT NOT NULL, `name` TEXT, `resType` TEXT, `aPoint` TEXT, `zPoint` TEXT, `aPointLng` TEXT, `aPointLat` TEXT, `zPointLng` TEXT, `zPointLat` TEXT, `status` TEXT, `continuousNum` INTEGER NOT NULL, PRIMARY KEY(`uuid`))",
         "fields": [
-          {
-            "fieldPath": "mid",
-            "columnName": "mid",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "taskUUID",
             "columnName": "taskUUID",
@@ -601,7 +595,7 @@
             "fieldPath": "uuid",
             "columnName": "uuid",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "name",
@@ -666,9 +660,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "mid"
+            "uuid"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [
           {
@@ -685,7 +679,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"272acc43409e444c161069a05b4f3793\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7fad8ae7dab065fabffdd6b853781b80\")"
     ]
   }
 }

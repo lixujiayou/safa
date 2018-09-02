@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.cazaea.sweetalert.SweetAlertDialog;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.inspur.hebeiline.R;
 import com.inspur.hebeiline.core.AllUrl;
@@ -44,11 +45,11 @@ public class SubmitLineModel extends BaseViewModel {
         super(application);
     }
 
-    private MutableLiveData<String> roundSiteList;
+    private MutableLiveData<Object> roundSiteList;
     private Context mContext;
 
 
-    public MutableLiveData<String> getCurrentData(Context context) {
+    public MutableLiveData<Object> getCurrentData(Context context) {
         this.mContext = context;
         if (roundSiteList == null) {
             roundSiteList = new MutableLiveData<>();
@@ -69,16 +70,17 @@ public class SubmitLineModel extends BaseViewModel {
 
         Map<String,String> map = new HashMap<>();
         map.put("Content-Type","application/json;charset=UTF-8");
-//        map.put("Authorization",headInfo);
+        map.put("Authorization",headInfo);
+        Gson gson = new Gson();
 
-        Log.d("qqqqqq","===="+listMy.toString());
+        Log.d("qqqqqq","===="+gson.toJson(listMy));
 
         showProgressDialog(mContext,"正在提交...");
         mRequest.updateTaskRecord(map
                 , listMy)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
+                .subscribe(new Observer<Object>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         if(isRequesting) {
@@ -88,7 +90,7 @@ public class SubmitLineModel extends BaseViewModel {
                     }
 
                     @Override
-                    public void onNext(String roundSiteEntity) {
+                    public void onNext(Object roundSiteEntity) {
                         String jsonRequest = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss Z").create().toJson(roundSiteEntity);
                         Log.d("qqqqqq", "roundSiteEntity==" + jsonRequest);
                         if (roundSiteList == null) {
@@ -111,10 +113,11 @@ public class SubmitLineModel extends BaseViewModel {
                         if (roundSiteList == null) {
                             roundSiteList = new MutableLiveData<>();
                         }
-                        if(e.getMessage().toString().contains("500")){
+                        if(e.getMessage().toString().contains("500") || e.toString().contains("End of input at line")){
                              roundSiteList.postValue("");
                             return;
                         }
+                        Log.d("qqqqqq","上传失败=="+e.toString());
 
 
                         Log.d("qqqqqq", "Constance.getMsgByException(e)==" + Constance.getMsgByException(e));
